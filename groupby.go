@@ -20,8 +20,6 @@
 
 package datatable
 
-import "github.com/BlueStorm001/gsql/util"
-
 func (dt *DataTable) GroupBy(query string) *DataTable {
 	if dt.Count <= 1 {
 		return dt
@@ -50,7 +48,7 @@ func (dt *DataTable) GroupBy(query string) *DataTable {
 		for _, column := range dataTable.Columns {
 			value := dr[column.Name]
 			row[column.Name] = value
-			key += "$" + util.ToString(value) + "$"
+			key += "$" + ToString(value) + "$"
 		}
 		if _, ok := group[key]; ok {
 			group[key]++
@@ -62,7 +60,7 @@ func (dt *DataTable) GroupBy(query string) *DataTable {
 	}
 
 	for _, dr := range dataTable.Rows {
-		dr["$GroupCount$"] = group[util.ToString(dr["$GroupKey$"])]
+		dr["$GroupCount$"] = group[ToString(dr["$GroupKey$"])]
 		dataTable.Count++
 	}
 	return dataTable

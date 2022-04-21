@@ -22,7 +22,6 @@ package datatable
 
 import (
 	"errors"
-	"github.com/BlueStorm001/gsql/util"
 	"strings"
 )
 
@@ -69,7 +68,7 @@ func GroupBy(buf []byte) *Expr {
 	exp := &Expr{Tokens: tokens, length: len(tokens)}
 	current := Groups{}
 	for _, tok := range tokens {
-		tok.value = util.BytToStr(tok.buf)
+		tok.value = BytToStr(tok.buf)
 		switch tok.kind {
 		case symbolKind:
 			curCopy := current
@@ -91,7 +90,7 @@ func OrderBy(buf []byte) *Expr {
 	exp := &Expr{Tokens: tokens, length: len(tokens)}
 	current := Orders{}
 	for _, tok := range tokens {
-		tok.value = util.BytToStr(tok.buf)
+		tok.value = BytToStr(tok.buf)
 		switch tok.kind {
 		case symbolKind:
 			curCopy := current
@@ -140,7 +139,7 @@ func (exp *Expr) stmt() *Wheres {
 loop:
 	for i := exp.next; i < exp.length; i++ {
 		tok := exp.Tokens[i]
-		tok.value = util.BytToStr(tok.buf)
+		tok.value = BytToStr(tok.buf)
 		switch tok.kind {
 		case symbolKind:
 			switch tok.value {

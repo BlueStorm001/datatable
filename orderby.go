@@ -21,7 +21,6 @@
 package datatable
 
 import (
-	"github.com/BlueStorm001/gsql/util"
 	"sort"
 )
 
@@ -37,8 +36,8 @@ func (dt *DataTable) OrderBy(query string) *DataTable {
 	var less = make([]lessFunc, count)
 	for i, item := range exp.OrderExpr {
 		less[i] = func(c1, c2 map[string]interface{}) bool {
-			v1, ok1 := util.FormatFloat(c1[item.Name])
-			v2, ok2 := util.FormatFloat(c2[item.Name])
+			v1, ok1 := FormatFloat(c1[item.Name])
+			v2, ok2 := FormatFloat(c2[item.Name])
 			if ok1 && ok2 {
 				if item.Op == "desc" {
 					return v1 > v2
@@ -47,9 +46,9 @@ func (dt *DataTable) OrderBy(query string) *DataTable {
 				}
 			} else {
 				if item.Op == "desc" {
-					return util.ToString(c1[item.Name]) > util.ToString(c2[item.Name])
+					return ToString(c1[item.Name]) > ToString(c2[item.Name])
 				} else {
-					return util.ToString(c1[item.Name]) < util.ToString(c2[item.Name])
+					return ToString(c1[item.Name]) < ToString(c2[item.Name])
 				}
 			}
 		}
