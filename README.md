@@ -1,6 +1,5 @@
-# gsql
+# datatable
 
-golang SQL ORM
 
 ``` golang
 import (
