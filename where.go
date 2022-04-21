@@ -21,7 +21,6 @@
 package datatable
 
 import (
-	"github.com/BlueStorm001/gsql/util"
 	"regexp"
 	"strconv"
 	"strings"
@@ -138,7 +137,7 @@ func (dt *DataTable) contrast(w *Wheres) *DataTable {
 				if !use {
 					number, err = strconv.ParseFloat(input, 64)
 				}
-				data, ok := util.FormatFloat(value)
+				data, ok := FormatFloat(value)
 				if err == nil && ok {
 					use = true
 					switch w.Op {
@@ -161,11 +160,11 @@ func (dt *DataTable) contrast(w *Wheres) *DataTable {
 					}
 				}
 			case "=", "==":
-				if input == util.ToString(value) {
+				if input == ToString(value) {
 					verify = true
 				}
 			case "!=", "<>":
-				if input != util.ToString(value) {
+				if input != ToString(value) {
 					verify = true
 				}
 			}
@@ -179,7 +178,7 @@ func (dt *DataTable) contrast(w *Wheres) *DataTable {
 }
 
 func likeValue(v interface{}, value string) (string, bool) {
-	dataStr := util.ToString(v)
+	dataStr := ToString(v)
 	args := strings.Split(value, "%")
 	switch len(args) {
 	case 2:
@@ -196,7 +195,7 @@ func likeValue(v interface{}, value string) (string, bool) {
 }
 
 func findValue(v interface{}, value string) (string, bool) {
-	dataStr := util.ToString(v)
+	dataStr := ToString(v)
 	value = strings.Replace(value, "%", ".", -1)
 	matched, _ := regexp.MatchString(value, dataStr)
 	return dataStr, matched
