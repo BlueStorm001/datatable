@@ -58,18 +58,3 @@ type DataTable struct {
 	Count   int
 	mode    findKind
 }
-
-type DataSet struct {
-	Tables []*DataTable
-}
-
-type UseMode int
-
-const (
-	Not UseMode = iota
-	Get
-	Add
-	Set
-	Del
-	Count
-)
